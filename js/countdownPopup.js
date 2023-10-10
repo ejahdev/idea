@@ -15,9 +15,9 @@ function updateCountdown() {
     const minutes = now.getMinutes();
     const seconds = now.getSeconds();
 
-    if (minutes === 29 && seconds === 0) {
+    if (minutes === 15 && seconds === 0) {
         showPopup(); // Call the function to show the popup
-    } else if (minutes === 32 && seconds === 0) {
+    } else if (minutes === 16 && seconds === 0) {
         hidePopup(); // Call the function to hide the popup
     } else {
         hideCountdown();
@@ -26,6 +26,7 @@ function updateCountdown() {
 
 // Function to show the popup
 function showPopup() {
+    console.log('showPopup() called');
     const popupElement = document.getElementById('popup');
     popupElement.style.display = 'block';
 
