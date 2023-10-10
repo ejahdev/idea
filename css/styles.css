@@ -6,7 +6,7 @@ body {
 }
 #clock {
     font-size: 40px;
-    text-align:center;
+    align-content: center;
     color: rgb(132, 255, 0);
     font-family: 'Anton', sans-serif; /* Apply retro analog alarm clock font */
 }
