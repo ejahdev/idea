@@ -22,11 +22,11 @@ body {
 /* Define custom fonts */
 @font-face {
     font-family: 'Retro Clock';
-    src: url('F:/Discord-Bots/420timerwebsite/fonts/alarmclock.ttf') format('truetype');
+    src: url('/fonts/alarmclock.ttf') format('truetype');
 }
 @font-face {
     font-family: 'Cool Bold';
-    src: url('F:/Discord-Bots/420timerwebsite/fonts/blackwizard.otf') format('opentype');
+    src: url('/fonts/blackwizard.otf') format('opentype');
 }
 
 /* Pop-up elements */
