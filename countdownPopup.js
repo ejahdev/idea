@@ -1,3 +1,15 @@
+// Function to update the clock
+function updateClock() {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+
+    const clockElement = document.getElementById('clock');
+    clockElement.textContent = `Current Time: ${hours}:${minutes}:${seconds}`;
+}
+
+// Function to update the countdown and handle the popup
 function updateCountdown() {
     const now = new Date();
     const minutes = now.getMinutes();
@@ -12,6 +24,7 @@ function updateCountdown() {
     }
 }
 
+// Function to show the popup
 function showPopup() {
     const popupElement = document.getElementById('popup');
     popupElement.style.display = 'block';
@@ -29,6 +42,7 @@ function showPopup() {
     }, 1000); // Show text after 1 second
 }
 
+// Function to hide the popup
 function hidePopup() {
     const popupElement = document.getElementById('popup');
     popupElement.style.display = 'none';
@@ -36,3 +50,17 @@ function hidePopup() {
     document.getElementById('popup-text').style.opacity = '0';
     popupElement.classList.remove('slide-in-left', 'slide-in-right'); // Remove animation classes
 }
+
+// Function to hide the countdown
+function hideCountdown() {
+    const countdownElement = document.getElementById('countdown');
+    countdownElement.style.display = 'none';
+
+    // Check for the countdown and clock again in 1 second
+    setTimeout(updateCountdown, 1000);
+    setTimeout(updateClock, 1000);
+}
+
+// Initial check for the countdown and clock
+updateCountdown();
+updateClock();
