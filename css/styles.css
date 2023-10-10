@@ -68,8 +68,8 @@ body {
 /* CSS for the popup text pulsing effect */
 @keyframes pulse {
     0% { font-size: 36px; }
-    50% { font-size: 40px; }
-    100% { font-size: 36px; }
+    50% { font-size: 50px; }
+    100% { font-size: 75px; }
 }
 #popup-text {
     font-size: 75px;
