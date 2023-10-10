@@ -7,18 +7,29 @@
     <style>
         body {
             background-color: transparent;
-        }
-        #countdown {
-            display: none;
             font-size: 24px;
             text-align: center;
             color: white;
         }
+        #countdown {
+            display: none;
+        }
     </style>
 </head>
 <body>
+    <div id="clock"></div>
     <div id="countdown"></div>
     <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            
+            const clockElement = document.getElementById('clock');
+            clockElement.textContent = `Current Time: ${hours}:${minutes}:${seconds}`;
+        }
+
         function updateCountdown() {
             const now = new Date();
             const minutes = now.getMinutes();
@@ -52,12 +63,14 @@
             const countdownElement = document.getElementById('countdown');
             countdownElement.style.display = 'none';
             
-            // Check for the countdown again in 1 second
+            // Check for the countdown and clock again in 1 second
             setTimeout(updateCountdown, 1000);
+            setTimeout(updateClock, 1000);
         }
 
-        // Initial check for the countdown
+        // Initial check for the countdown and clock
         updateCountdown();
+        updateClock();
     </script>
 </body>
 </html>
