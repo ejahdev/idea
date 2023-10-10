@@ -6,19 +6,59 @@
     <title>Countdown Timer</title>
     <style>
         body {
-            background-color: transparent;
-            font-size: 24px;
+            background-color: rgb(28, 28, 28);
+            font-size: 40px;
             text-align: center;
-            color: white;
+            color: rgb(132, 255, 0);
+            font-family: 'Retro Clock', sans-serif; /* Apply retro analog alarm clock font */
         }
         #countdown {
             display: none;
+            font-size: 60px; /* Increase font size for countdown */
+            font-weight: bold; /* Make it bold */
+            color: rgb(51, 180, 51); /* Set the text color to green */
+            font-family: 'Cool Bold', sans-serif; /* Apply cool big bold font for countdown */
+        }
+
+        /* Define custom fonts */
+        @font-face {
+            font-family: 'Retro Clock';
+            src: url('fonts/alarm clock.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Cool Bold';
+            src: url('fonts/blackwizard.otf') format('opentype');
+        }
+
+        /* Pop-up elements */
+        #popup {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 33.33%;
+            background-image: url('cloud.png'); /* Replace with your image file */
+            background-size: cover;
+            opacity: 0;
+            display: none;
+        }
+        #popup-text {
+            font-size: 36px;
+            font-weight: bold;
+            color: rgb(149, 255, 0);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
 <body>
     <div id="clock"></div>
     <div id="countdown"></div>
+    <div id="popup">
+        <div id="popup-text">Cheers! Happy 20!!</div>
+    </div>
     <script>
         function updateClock() {
             const now = new Date();
@@ -35,28 +75,28 @@
             const minutes = now.getMinutes();
             const seconds = now.getSeconds();
             
-            // Check if it's 5 minutes before the 20th minute of the hour
-            if (minutes === 15 && seconds === 0) {
-                showCountdown();
+            // Check if it's 20 minutes past the hour
+            if (minutes === 22 && seconds === 0) {
+                showPopup();
+            } else if (minutes === 23 && seconds === 0) {
+                hidePopup();
             } else {
                 hideCountdown();
             }
         }
 
-        function showCountdown() {
-            const countdownElement = document.getElementById('countdown');
-            countdownElement.style.display = 'block';
-            
-            // Calculate the time remaining until the 20th minute
-            const now = new Date();
-            const remainingMinutes = 20 - now.getMinutes() - 1;
-            const remainingSeconds = 60 - now.getSeconds();
-            
-            // Update the countdown element
-            countdownElement.textContent = `Countdown: ${remainingMinutes}:${remainingSeconds}`;
-            
-            // Update the countdown every second
-            setTimeout(updateCountdown, 1000);
+        function showPopup() {
+            const popupElement = document.getElementById('popup');
+            popupElement.style.display = 'block';
+            setTimeout(function() {
+                document.getElementById('popup-text').textContent = '';
+            }, 60000); // Display the message for 1 minute (60000 milliseconds)
+        }
+
+        function hidePopup() {
+            const popupElement = document.getElementById('popup');
+            popupElement.style.display = 'none';
+            document.getElementById('popup-text').textContent = '';
         }
 
         function hideCountdown() {
