@@ -12,14 +12,27 @@ function updateCountdown() {
     }
 }
 
-// Function to show the popup
 function showPopup() {
     const popupElement = document.getElementById('popup');
-    popupElement.style.opacity = '1'; // Set the opacity to make it visible
+    popupElement.style.display = 'block';
+
+    // Determine the direction of the cloud animation (left or right)
+    const direction = Math.random() < 0.5 ? 'slide-in-left' : 'slide-in-right';
+    popupElement.classList.add(direction);
+
+    setTimeout(function () {
+        document.getElementById('popup-text').textContent = 'Cheers! Happy 20!!';
+    }, 500); // Delay showing text for half a second
+
+    setTimeout(function () {
+        document.getElementById('popup-text').style.opacity = '1';
+    }, 1000); // Show text after 1 second
 }
 
-// Function to hide the popup
 function hidePopup() {
     const popupElement = document.getElementById('popup');
-    popupElement.style.opacity = '0'; // Set the opacity to make it transparent
+    popupElement.style.display = 'none';
+    document.getElementById('popup-text').textContent = '';
+    document.getElementById('popup-text').style.opacity = '0';
+    popupElement.classList.remove('slide-in-left', 'slide-in-right'); // Remove animation classes
 }

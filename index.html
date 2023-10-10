@@ -4,56 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Countdown Timer</title>
-    <style>
-        body {
-            background-color: rgb(28, 28, 28);
-            font-size: 40px;
-            text-align: center;
-            color: rgb(132, 255, 0);
-            font-family: 'Retro Clock', sans-serif; /* Apply retro analog alarm clock font */
-        }
-        #countdown {
-            display: none;
-            font-size: 60px; /* Increase font size for countdown */
-            font-weight: bold; /* Make it bold */
-            color: rgb(51, 180, 51); /* Set the text color to green */
-            font-family: 'Cool Bold', sans-serif; /* Apply cool big bold font for countdown */
-        }
-
-        /* Define custom fonts */
-        @font-face {
-            font-family: 'Retro Clock';
-            src: url('fonts/alarm clock.ttf') format('truetype');
-        }
-        @font-face {
-            font-family: 'Cool Bold';
-            src: url('fonts/blackwizard.otf') format('opentype');
-        }
-
-        /* Pop-up elements */
-        #popup {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 33.33%;
-            background-image: url('cloud.png'); /* Replace with your image file */
-            background-size: cover;
-            opacity: 0;
-            display: none;
-        }
-        #popup-text {
-            font-size: 36px;
-            font-weight: bold;
-            color: rgb(149, 255, 0);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-    </style>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Your HTML content -->
     <div id="clock"></div>
     <div id="countdown"></div>
     <div id="popup">
