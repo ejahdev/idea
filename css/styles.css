@@ -22,7 +22,7 @@ body {
 /* Define custom fonts */
 @font-face {
     font-family: 'Retro Clock';
-    src: url('fonts/alarm clock.ttf') format('truetype');
+    src: url('fonts/alarmclock.ttf') format('truetype');
 }
 @font-face {
     font-family: 'Cool Bold';
