@@ -24,9 +24,8 @@ function showMessage(message, duration) {
             finalMessageTimeout = setTimeout(() => {
                 hideClouds(); // Hide the clouds 1 minute after the final message
                 hideMessage(); // Hide the final message after 1 minute
-                stopClockUpdate(); // Stop the clock update
             }, 60000);
-        } else {
+        } else if (message === '0 seconds until the 20!') {
             countdownMessage.style.display = 'none';
             countdownMessage.style.animation = 'none';
         }
@@ -42,12 +41,6 @@ function hideClock() {
     clock.style.display = 'none';
 }
 
-function stopClockUpdate() {
-    clearInterval(clockUpdateInterval);
-}
-
-let clockUpdateInterval;
-
 function updateClock() {
     const now = new Date();
     const hours = now.getHours();
@@ -58,8 +51,6 @@ function updateClock() {
 
     const timeString = `${twelveHourFormat}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${ampm}`;
     clock.innerText = timeString;
-
-    clockUpdateInterval = setTimeout(updateClock, 1000); // Update the clock every second
 }
 
 function hideClouds() {
@@ -81,13 +72,12 @@ function updateCountdown() {
     const now = new Date();
     const minutes = now.getMinutes();
     const seconds = now.getSeconds();
-    const remainingSeconds = 60 - seconds;
 
     if (minutes === 15 && !messageShown) {
         showMessage('5 minutes till the 20!', 60000);
     } else if (minutes === 18 && !messageShown) {
-        const remainingMinutes = 20 - minutes - 1; // Adjust for the 2-minute difference
-        showMessage(`${remainingMinutes}:${remainingSeconds} until the 20!`, 60000);
+        const remainingSeconds = 60 - seconds;
+        showMessage(`${remainingSeconds} seconds until the 20!`, 60000);
         cloudLeft.style.animation = 'moveCloudLeft 10s linear infinite';
         cloudRight.style.animation = 'moveCloudRight 10s linear infinite';
     } else if (minutes === 20 && !messageShown) {
