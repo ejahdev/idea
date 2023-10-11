@@ -1,171 +1,50 @@
-/* Define custom fonts and other styles */
 body {
-    background-color: rgb(37, 36, 36);
-    font-size: 40px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: rgb(32, 31, 31);
+    overflow: hidden;
 }
 
-#clock {
-    font-size: 40px;
-    align-content: center;
-    color: rgb(132, 255, 0);
-    font-family: 'Anton', sans-serif; /* Apply retro analog alarm clock font */
-}
-
-#countdown {
+#countdown-message {
     display: none;
-    font-size: 60px; /* Increase font size for countdown */
-    font-weight: bold; /* Make it bold */
-    color: rgb(51, 180, 51); /* Set the text color to green */
-    font-family: 'Cool Bold', sans-serif; /* Apply cool big bold font for countdown */
+    position: absolute;
+    font-size: 40px;
+    background-color: #aaff00;
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    border-style: ridge;
 }
 
-/* Define custom fonts */
-@font-face {
-    font-family: 'Cool Bold';
-    src: url('https://raw.githubusercontent.com/ejahdev/idea/main/fonts/blackwizard.otf') format('opentype');
-}
-
-/* Define the move-up animation */
-@keyframes moveUp {
-    0% {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-/* Define the move-up animation */
-@keyframes moveDown {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-}
-
-@keyframes moveUpDown {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px); /* Adjust the distance the text moves */
-    }
-}
-
-/* CSS for the popup pulsing effect */
-@keyframes pulse {
-    50% {
-        font-size: 50px;
-        opacity: 0.5; /* Adjust opacity */
-    }
-    100% {
-        font-size: 75px;
-        opacity: 1; /* Adjust opacity */
-    }
-}
-
-/* CSS for the popup */
-#popup {
+.cloud {
     position: absolute;
     bottom: 0;
-    left: 0;
-    top: 70%; /* Adjust positioning */
-    width: 100%;
-    text-align: center; /* Center text in the popup */
-    background-image: none;
-    background-size: cover;
-    opacity: 50;
-    display: none;
-    animation: moveUp 5s ease-in-out forwards; /* Only the moveUp animation */
+    animation-duration: 10s; /* Adjust the animation duration as needed */
+    width: 1000px; /* Increase the width and height to adjust the size */
+    height: auto;
 }
 
-/* CSS for the popup text pulsing effect */
-#popup-text {
-    font-size: 50px;
-    font-weight: bold;
-    color: rgb(149, 255, 0);
-    position: relative; /* Change to relative positioning */
-    top: 50%;
-    transform: translateY(-50%); /* Vertically center the text */
-    animation: pulse 2s infinite alternate; /* Apply the pulse animation */
+#cloud-left {
+    left: -500px; /* Initial position off the left side */
 }
 
-/* Animation for sliding in from left */
-#popup.slide-in-left {
-    animation: slideInFromLeft 1s ease-in-out forwards, moveUp 2s ease-in-out forwards;
+#cloud-right {
+    right: -500px; /* Initial position off the right side */
 }
 
-/* Animation for sliding in from right */
-#popup.slide-in-right {
-    animation: slideInFromRight 1s ease-in-out forwards, moveUp 2s ease-in-out forwards;
+/* Add CSS keyframes for cloud animation */
+@keyframes moveCloudLeft {
+    0% { left: -400px; }
+    50% { left: 0; }
+    100% { left: -400px; }
 }
 
-/* CSS for the clouds */
-.left-cloud {
-    position: absolute;
-    left: -25%; /* Start the left cloud off-screen */
-    width: 60%; /* Adjust the cloud's width */
-    height: 33.33%;
-    background-image: url('img/cloudLeft.png'); /* Specify the left cloud image */
-    background-size: cover;
-    opacity: 1;
-    animation-duration: 10s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    background-repeat: no-repeat;
-    display: none; /* Initially hide clouds */
-}
-
-/* Add styling for the right cloud */
-.right-cloud {
-    position: absolute;
-    right: -25%; /* Start the right cloud off-screen */
-    width: 60%; /* Adjust the cloud's width */
-    height: 33.33%;
-    background-image: url('img/cloudRight.png'); /* Specify the right cloud image */
-    background-size: cover;
-    opacity: 1;
-    animation-duration: 10s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    background-repeat: no-repeat;
-    display: none; /* Initially hide clouds */
-}
-
-/* Add styling for the left cloud */
-.left-cloud {
-    left: -25%; /* Start the left cloud off-screen */
-}
-
-/* Add styling for the right cloud */
-.right-cloud {
-    right: -25%; /* Start the right cloud off-screen */
-}
-
-/* Adjust the keyframes for the clouds to create the desired effect */
-@keyframes moveLeft {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(0%);
-    }
-}
-
-@keyframes moveRight {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(0%);
-    }
+@keyframes moveCloudRight {
+    0% { right: -400px; }
+    50% { right: 0; }
+    100% { right: -400px; }
 }

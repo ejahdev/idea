@@ -1,51 +1,46 @@
-// Function to update the countdown and handle the popup
+const countdownMessage = document.getElementById('countdown-message');
+const cloudLeft = document.getElementById('cloud-left');
+const cloudRight = document.getElementById('cloud-right');
+
+let messageShown = false;
+let finalMessageShown = false;
+
+function showMessage(message, duration) {
+    countdownMessage.innerText = message;
+    countdownMessage.style.display = 'block';
+    setTimeout(() => {
+        countdownMessage.style.display = 'none';
+        if (message === 'CHEERS HAPPY 20!!') {
+            hideClouds();
+        }
+    }, duration);
+}
+
+function hideClouds() {
+    cloudLeft.style.display = 'none';
+    cloudRight.style.display = 'none';
+}
+
 function updateCountdown() {
     const now = new Date();
     const minutes = now.getMinutes();
     const seconds = now.getSeconds();
+    const remainingSeconds = 60 - seconds;
 
-    if (minutes === 18 && seconds === 0) {
-        showPopup("Cheers! Happy 20!!!", 60000);
-    } else if (minutes === 20 && seconds === 0) {
-        showPopup("1 minute till the 20", 60000);
-    } else if (minutes === 21 && seconds === 0) {
-        showPopup("5 minutes till the 20", 60000);
-    } else {
-        hideCountdown();
+    if (minutes === 57 && !messageShown) {
+        showMessage('5 minutes till the 20!', 30000);
+        messageShown = true;
+    } else if (minutes === 59) {
+        showMessage(`${remainingSeconds} seconds till the 20`, 60000);
+        cloudLeft.style.animation = 'moveCloudLeft 10s linear infinite';
+        cloudRight.style.animation = 'moveCloudRight 10s linear infinite';
+    } else if (minutes === 0 && !finalMessageshown) {
+        showMessage('CHEERS HAPPY 20!!', 60000);
+    } else if (minutes === 1) {
+        cloudLeft.style.animation = 'none';
+        cloudRight.style.animation = 'none';
     }
 }
 
-// Function to show the popup with dynamic text and duration
-function showPopup(text, duration) {
-    const popupElement = document.getElementById('popup');
-    const popupTextElement = document.getElementById('popup-text');
-
-    // Show the popup with the given text
-    popupTextElement.textContent = text;
-    popupElement.style.display = 'block';
-
-    // Hide the text and popup after the specified duration
-    setTimeout(function () {
-        hidePopup();
-    }, duration);
-}
-
-// Function to hide the popup
-function hidePopup() {
-    const popupElement = document.getElementById('popup');
-
-    // Hide the popup and reset animation
-    popupElement.style.display = 'none';
-}
-
-// Function to hide the countdown
-function hideCountdown() {
-    const countdownElement = document.getElementById('countdown');
-    countdownElement.style.display = 'none';
-
-    // Check for the countdown and clock again in 1 second
-    setTimeout(updateCountdown, 1000);
-}
-
-// Initial check for the countdown
+setInterval(updateCountdown, 1000);
 updateCountdown();
