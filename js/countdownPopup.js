@@ -7,24 +7,28 @@ let messageShown = false;
 let finalMessageTimeout;
 
 function showMessage(message, duration) {
-    countdownMessage.innerText = message;
-    countdownMessage.style.display = 'block';
-    countdownMessage.style.animation = 'bounce 0.5s ease-in-out infinite';
+    if (countdownMessage.innerText !== message) {
+        // Only show the message if it's different from the current message
+        countdownMessage.innerText = message;
+        countdownMessage.style.display = 'block';
+        countdownMessage.style.animation = 'bounce 0.5s ease-in-out infinite';
+    }
 
     if (message === '5 minutes till the 20!') {
         showClock(); // Show the clock when the first message appears
     }
 
     setTimeout(() => {
-        countdownMessage.style.display = 'none';
-        countdownMessage.style.animation = 'none';
-
         if (message === 'CHEERS HAPPY 20!!') {
             messageShown = true; // Mark the message as shown
             finalMessageTimeout = setTimeout(() => {
                 hideClouds(); // Hide the clouds 1 minute after the final message
                 hideMessage(); // Hide the final message after 1 minute
+                stopClockUpdate(); // Stop the clock update
             }, 60000);
+        } else {
+            countdownMessage.style.display = 'none';
+            countdownMessage.style.animation = 'none';
         }
     }, duration);
 }
@@ -38,6 +42,12 @@ function hideClock() {
     clock.style.display = 'none';
 }
 
+function stopClockUpdate() {
+    clearInterval(clockUpdateInterval);
+}
+
+let clockUpdateInterval;
+
 function updateClock() {
     const now = new Date();
     const hours = now.getHours();
@@ -49,12 +59,14 @@ function updateClock() {
     const timeString = `${twelveHourFormat}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${ampm}`;
     clock.innerText = timeString;
 
-    setTimeout(updateClock, 1000); // Update the clock every second
+    clockUpdateInterval = setTimeout(updateClock, 1000); // Update the clock every second
 }
 
 function hideClouds() {
     cloudLeft.style.display = 'none';
     cloudRight.style.display = 'none';
+    cloudLeft.style.animation = 'none'; // Stop cloud animation
+    cloudRight.style.animation = 'none'; // Stop cloud animation
 }
 
 function hideMessage() {
@@ -73,8 +85,9 @@ function updateCountdown() {
 
     if (minutes === 15 && !messageShown) {
         showMessage('5 minutes till the 20!', 60000);
-    } else if (minutes === 19) {
-        showMessage(`${remainingSeconds} seconds till the 20`, 60000);
+    } else if (minutes === 18 && !messageShown) {
+        const remainingMinutes = 20 - minutes - 1; // Adjust for the 2-minute difference
+        showMessage(`${remainingMinutes}:${remainingSeconds} until the 20!`, 60000);
         cloudLeft.style.animation = 'moveCloudLeft 10s linear infinite';
         cloudRight.style.animation = 'moveCloudRight 10s linear infinite';
     } else if (minutes === 20 && !messageShown) {

@@ -4,14 +4,14 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
-    background-color: black;
+    background-color: transparent;
     overflow: hidden;
 }
 
 #countdown-message {
     display: none;
     position: absolute;
-    font-size: 40px;
+    font-size: 70px;
     font-weight: bolder;
     bottom: 400px;
     background-color: #aaff00;
@@ -25,8 +25,8 @@ body {
 /* Add CSS styles for the clock */
 #clock {
     position: absolute;
-    bottom: 500px;
-    font-size: 30px;
+    bottom: 540px;
+    font-size: 50px;
     font-weight: bolder;
     color: rgb(0, 171, 14);
     display: none;
