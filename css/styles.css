@@ -1,9 +1,10 @@
 /* Define custom fonts and other styles */
 body {
-    background-color: black;
+    background-color: rgb(37, 36, 36);
     font-size: 40px;
     text-align: center;
 }
+
 #clock {
     font-size: 40px;
     align-content: center;
@@ -36,6 +37,7 @@ body {
         opacity: 1;
     }
 }
+
 /* Define the move-up animation */
 @keyframes moveDown {
     0% {
@@ -50,46 +52,50 @@ body {
 
 @keyframes moveUpDown {
     0%, 100% {
-      transform: translateY(0);
+        transform: translateY(0);
     }
     50% {
-      transform: translateY(-10px); /* Adjust the distance the text moves */
+        transform: translateY(-10px); /* Adjust the distance the text moves */
     }
-  }  
+}
 
+/* CSS for the popup pulsing effect */
+@keyframes pulse {
+    50% {
+        font-size: 50px;
+        opacity: 0.5; /* Adjust opacity */
+    }
+    100% {
+        font-size: 75px;
+        opacity: 1; /* Adjust opacity */
+    }
+}
 
-/* Pop-up elements */
+/* CSS for the popup */
 #popup {
     position: absolute;
     bottom: 0;
     left: 0;
-    top: 60%;
+    top: 70%; /* Adjust positioning */
     width: 100%;
-    align-content: center;
-    /*height: 33.33%;*/
-    background-image: url('https://raw.githubusercontent.com/ejahdev/idea/main/img/cloud.png'); /* Replace with your cloud image */
+    text-align: center; /* Center text in the popup */
+    background-image: none;
     background-size: cover;
     opacity: 50;
     display: none;
-    animation: moveUp 5s ease-in-out forwards, pulse 3s infinite alternate; /* Animation for moving up */
+    animation: moveUp 5s ease-in-out forwards; /* Only the moveUp animation */
 }
 
 /* CSS for the popup text pulsing effect */
-@keyframes pulse {
-    50% { font-size: 50px; }
-    100% { font-size: 75px; }
-}
 #popup-text {
     font-size: 50px;
     font-weight: bold;
     color: rgb(149, 255, 0);
-    position: absolute;
-    text-align: center;
+    position: relative; /* Change to relative positioning */
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%); /* Vertically center the text */
     animation: pulse 2s infinite alternate; /* Apply the pulse animation */
-  }
+}
 
 /* Animation for sliding in from left */
 #popup.slide-in-left {
@@ -99,4 +105,67 @@ body {
 /* Animation for sliding in from right */
 #popup.slide-in-right {
     animation: slideInFromRight 1s ease-in-out forwards, moveUp 2s ease-in-out forwards;
+}
+
+/* CSS for the clouds */
+.left-cloud {
+    position: absolute;
+    left: -25%; /* Start the left cloud off-screen */
+    width: 60%; /* Adjust the cloud's width */
+    height: 33.33%;
+    background-image: url('img/cloudLeft.png'); /* Specify the left cloud image */
+    background-size: cover;
+    opacity: 1;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    background-repeat: no-repeat;
+    display: none; /* Initially hide clouds */
+}
+
+/* Add styling for the right cloud */
+.right-cloud {
+    position: absolute;
+    right: -25%; /* Start the right cloud off-screen */
+    width: 60%; /* Adjust the cloud's width */
+    height: 33.33%;
+    background-image: url('img/cloudRight.png'); /* Specify the right cloud image */
+    background-size: cover;
+    opacity: 1;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    background-repeat: no-repeat;
+    display: none; /* Initially hide clouds */
+}
+
+/* Add styling for the left cloud */
+.left-cloud {
+    left: -25%; /* Start the left cloud off-screen */
+}
+
+/* Add styling for the right cloud */
+.right-cloud {
+    right: -25%; /* Start the right cloud off-screen */
+}
+
+/* Adjust the keyframes for the clouds to create the desired effect */
+@keyframes moveLeft {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes moveRight {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
 }

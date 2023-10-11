@@ -4,63 +4,38 @@ function updateCountdown() {
     const minutes = now.getMinutes();
     const seconds = now.getSeconds();
 
-    console.log(`Minutes: ${minutes}, Seconds: ${seconds}`); // Log the current time
-
-    if (minutes === 15 && seconds === 0) {
-        showPopup('5 minutes till the 20', 60); // Show the first message for 1 minute
-    } else if (minutes === 19 && seconds === 0) {
-        showPopup('1 minute till the 20', 60); // Show the second message for 1 minute
+    if (minutes === 18 && seconds === 0) {
+        showPopup("Cheers! Happy 20!!!", 60000);
     } else if (minutes === 20 && seconds === 0) {
-        showPopup('Cheers! Happy 20!!!', 60); // Show the final message for 1 minute
+        showPopup("1 minute till the 20", 60000);
+    } else if (minutes === 21 && seconds === 0) {
+        showPopup("5 minutes till the 20", 60000);
     } else {
         hideCountdown();
     }
 }
 
-// Function to show the popup with a specific message for a given duration
-function showPopup(message, durationInSeconds) {
-    try {
-        console.log('showPopup() called');
-        const popupElement = document.getElementById('popup');
+// Function to show the popup with dynamic text and duration
+function showPopup(text, duration) {
+    const popupElement = document.getElementById('popup');
+    const popupTextElement = document.getElementById('popup-text');
 
-        if (!popupElement) {
-            throw new Error('Popup element not found');
-        }
+    // Show the popup with the given text
+    popupTextElement.textContent = text;
+    popupElement.style.display = 'block';
 
-        popupElement.style.display = 'block';
+    // Hide the text and popup after the specified duration
+    setTimeout(function () {
+        hidePopup();
+    }, duration);
+}
 
-        const popupTextElement = document.getElementById('popup-text');
-        if (!popupTextElement) {
-            throw new Error('Popup text element not found');
-        }
+// Function to hide the popup
+function hidePopup() {
+    const popupElement = document.getElementById('popup');
 
-        // Hide the clock when the popup appears
-        const clockElement = document.getElementById('clock');
-        clockElement.style.display = 'none';
-
-        popupTextElement.textContent = message;
-
-        // Determine the direction of the cloud animation (left or right)
-        const direction = Math.random() < 0.5 ? 'slide-in-left' : 'slide-in-right';
-        popupElement.classList.add(direction);
-
-        setTimeout(function () {
-            popupTextElement.style.opacity = '1';
-        }, 1000); // Show text after 1 second
-
-        // Hide the text after the specified duration (in milliseconds)
-        setTimeout(function () {
-            popupTextElement.style.opacity = '0';
-
-            // Show the clock when the popup disappears
-            clockElement.style.display = 'block';
-
-            // Hide the cloud popup
-            popupElement.style.display = 'none';
-        }, durationInSeconds * 1000);
-    } catch (error) {
-        console.error('Error in showPopup():', error);
-    }
+    // Hide the popup and reset animation
+    popupElement.style.display = 'none';
 }
 
 // Function to hide the countdown
