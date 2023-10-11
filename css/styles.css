@@ -1,6 +1,6 @@
 /* Define custom fonts and other styles */
 body {
-    background-color: transparent;
+    background-color: black;
     font-size: 40px;
     text-align: center;
 }
@@ -48,13 +48,22 @@ body {
     }
 }
 
+@keyframes moveUpDown {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px); /* Adjust the distance the text moves */
+    }
+  }  
+
 
 /* Pop-up elements */
 #popup {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
-    top: 25%;
+    top: 60%;
     width: 100%;
     align-content: center;
     /*height: 33.33%;*/
@@ -67,20 +76,20 @@ body {
 
 /* CSS for the popup text pulsing effect */
 @keyframes pulse {
-    0% { font-size: 36px; }
     50% { font-size: 50px; }
     100% { font-size: 75px; }
 }
 #popup-text {
-    font-size: 75px;
+    font-size: 50px;
     font-weight: bold;
     color: rgb(149, 255, 0);
     position: absolute;
-    text-align: top;
+    text-align: center;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: pulse 2s infinite alternate; /* Animation for pulsing text */
-}
+    animation: pulse 2s infinite alternate; /* Apply the pulse animation */
+  }
 
 /* Animation for sliding in from left */
 #popup.slide-in-left {
