@@ -3,12 +3,15 @@ const cloudLeft = document.getElementById('cloud-left');
 const cloudRight = document.getElementById('cloud-right');
 
 let messageShown = false;
-let finalMessageShown = false;
+let finalMessageTimeout;
 
 function showMessage(message, duration) {
     countdownMessage.innerText = message;
     countdownMessage.style.display = 'block';
-    setTimeout(() => {
+    if (finalMessageTimeout) {
+        clearTimeout(finalMessageTimeout);
+    }
+    finalMessageTimeout = setTimeout(() => {
         countdownMessage.style.display = 'none';
         if (message === 'CHEERS HAPPY 20!!') {
             hideClouds();
@@ -27,19 +30,18 @@ function updateCountdown() {
     const seconds = now.getSeconds();
     const remainingSeconds = 60 - seconds;
 
-    if (minutes === 3 && !messageShown) {
+    if (minutes === 15 && !messageShown) {
         showMessage('5 minutes till the 20!', 30000);
         messageShown = true;
-    } else if (minutes === 5) {
+    } else if (minutes === 19) {
         showMessage(`${remainingSeconds} seconds till the 20`, 60000);
         cloudLeft.style.animation = 'moveCloudLeft 10s linear infinite';
         cloudRight.style.animation = 'moveCloudRight 10s linear infinite';
-    } else if (minutes === 6 && !finalMessageShown) {
+    } else if (minutes === 20 && !messageShown) {
         showMessage('CHEERS HAPPY 20!!', 60000);
-    } else if (minutes === 7) {
-        cloudLeft.style.animation = 'none';
-        cloudRight.style.animation = 'none';
     }
+    cloudLeft.style.animation = 'none';
+    cloudRight.style.animation = 'none';
 }
 
 setInterval(updateCountdown, 1000);
