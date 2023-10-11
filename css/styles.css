@@ -4,7 +4,7 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
-    background-color: transparent;
+    background-color: black;
     overflow: hidden;
 }
 
@@ -25,9 +25,9 @@ body {
 /* Add CSS styles for the clock */
 #clock {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
+    bottom: 500px;
+    font-size: 30px;
+    font-weight: bolder;
     color: rgb(0, 171, 14);
     display: none;
 }
@@ -54,7 +54,6 @@ body {
     opacity: 0.7;
     transition: opacity 5s ease-in-out; /* Adjust the duration as needed */
 }
-
 
 /* Add CSS keyframes for cloud animation */
 @keyframes moveCloudLeft {
