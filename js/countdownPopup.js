@@ -76,7 +76,7 @@ function updateCountdown() {
     if (minutes === 15 && !messageShown) {
         showMessage('5 minutes till the 20!', 60000);
     } else if (minutes === 18 && !messageShown) {
-        const remainingSeconds = 60 - seconds;
+        const remainingSeconds = 120 - seconds;
         showMessage(`${remainingSeconds} seconds until the 20!`, 120000);
         cloudLeft.style.animation = 'moveCloudLeft 10s linear infinite';
         cloudRight.style.animation = 'moveCloudRight 10s linear infinite';
