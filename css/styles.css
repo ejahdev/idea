@@ -15,8 +15,7 @@ body {
     font-weight: bolder;
     bottom: 400px;
     color: #ffffff;
-    outline: 3px;
-    outline-color: black;
+    -webkit-text-stroke: 6px black;
     padding: 10px 20px;
     text-align: center;
     animation: bounce 0.5s ease-in-out infinite; /* Adjust the duration and timing function as needed */
