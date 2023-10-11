@@ -77,7 +77,7 @@ function updateCountdown() {
         showMessage('5 minutes till the 20!', 60000);
     } else if (minutes === 18 && !messageShown) {
         const remainingSeconds = 60 - seconds;
-        showMessage(`${remainingSeconds} seconds until the 20!`, 60000);
+        showMessage(`${remainingSeconds} seconds until the 20!`, 120000);
         cloudLeft.style.animation = 'moveCloudLeft 10s linear infinite';
         cloudRight.style.animation = 'moveCloudRight 10s linear infinite';
     } else if (minutes === 20 && !messageShown) {
@@ -87,5 +87,7 @@ function updateCountdown() {
 
 // To ensure the message appears at exactly 20 minutes past the hour
 // Call updateCountdown every second
-setInterval(updateCountdown, 1000);
-updateCountdown();
+setInterval(() => {
+    updateCountdown();
+    updateClock(); // Add this line to update the clock every second
+}, 1000);
