@@ -13,12 +13,23 @@ body {
     position: absolute;
     font-size: 40px;
     font-weight: bolder;
+    bottom: 400px;
     background-color: #aaff00;
     color: #000000;
     padding: 10px 20px;
     border-radius: 5px;
     text-align: center;
     animation: bounce 0.5s ease-in-out infinite; /* Adjust the duration and timing function as needed */
+}
+
+/* Add CSS styles for the clock */
+#clock {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: rgb(0, 171, 14);
+    display: none;
 }
 
 .cloud {
