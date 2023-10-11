@@ -27,16 +27,16 @@ function updateCountdown() {
     const seconds = now.getSeconds();
     const remainingSeconds = 60 - seconds;
 
-    if (minutes === 57 && !messageShown) {
+    if (minutes === 3 && !messageShown) {
         showMessage('5 minutes till the 20!', 30000);
         messageShown = true;
-    } else if (minutes === 59) {
+    } else if (minutes === 5) {
         showMessage(`${remainingSeconds} seconds till the 20`, 60000);
         cloudLeft.style.animation = 'moveCloudLeft 10s linear infinite';
         cloudRight.style.animation = 'moveCloudRight 10s linear infinite';
-    } else if (minutes === 0 && !finalMessageshown) {
+    } else if (minutes === 6 && !finalMessageShown) {
         showMessage('CHEERS HAPPY 20!!', 60000);
-    } else if (minutes === 1) {
+    } else if (minutes === 7) {
         cloudLeft.style.animation = 'none';
         cloudRight.style.animation = 'none';
     }
