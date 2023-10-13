@@ -14,7 +14,7 @@ function showMessage(message, duration) {
     if (countdownMessage.innerHTML !== message) {
         // Wrap specific words in spans with different colors
         message = message.replace(/\b(10|9|8|7|6|5|4|3|2|1) seconds\b/g, '<span style="color: red;">$1</span> seconds');
-        message = message.replace(/\b(20|19|18|17|16|15|14|13|12|11) seconds\b/g, '<span style="color: yellow;">$1</span> seconds');
+        message = message.replace(/\b(20|19|18|17|16|15|14|13|12|11) seconds\b/g, '<span style="color: orange;">$1</span> seconds');
         message = message.replace('CHEERS', '<span style="color: green;">CHEERS</span>');
         countdownMessage.innerHTML = message;
         countdownMessage.style.display = 'block';
@@ -47,6 +47,21 @@ function hideFinalElements() {
     hideMessage();
     hideClock();
     hideLeaves();
+}
+
+function hideFinalElements() {
+    // Smoothly hide the countdown message, clouds, leaves, and individual leaves
+    const elementsToHide = document.querySelectorAll('#countdown-message, .cloud, .leaf, .leaves, .final-message, #Container');
+    elementsToHide.forEach((element) => {
+        element.style.opacity = 0;
+    });
+
+    setTimeout(() => {
+        // Hide the elements and remove them from the DOM
+        elementsToHide.forEach((element) => {
+            element.style.display = 'none';
+        });
+    }, 2000); // Adjust the duration to match the transition duration
 }
 
 function showClock() {
@@ -113,7 +128,7 @@ function hideMessage() {
 
 function showLeaves() {
     Container.style.display = 'block';
-    setInterval(createLeaf, 1000); // Add a new leaf every 1 second (adjust as needed)
+    setInterval(createLeaf, 5000); // Add a new leaf every 1 second (adjust as needed)
 }
 
 function hideLeaves() {
@@ -130,12 +145,15 @@ function updateCountdown() {
         setTimeout(() => {
             if (countdownMessage.innerHTML === '5 minutes till the 20!') {
                 hideMessage();
+                hideClock();
             }
         }, 60000);
     } else if (minutes === 19 && !messageShown) {
+        showClock();
         if (seconds === 0) {
             const remainingSeconds = 60;
             showMessage(`${remainingSeconds} seconds until the 20!`, 1000);
+
         } else {
             const remainingSeconds = 60 - seconds;
             showMessage(`${remainingSeconds} seconds until the 20!`, 1000);
@@ -153,16 +171,16 @@ function updateCountdown() {
 function createLeaf() {
     const leaf = document.createElement('div');
     leaf.classList.add('leaf');
-    leaf.style.left = `${Math.random() * 100}%`; // Random horizontal placement
-    leaf.style.top = `${Math.random() * 100}%`; // Random vertical placement
+    leaf.style.left = `${Math.random() * window.innerWidth}px`; // Random horizontal placement
+    leaf.style.top = `${Math.random() * window.innerHeight}px`; // Random vertical placement
     Container.appendChild(leaf);
     setTimeout(() => {
         Container.removeChild(leaf);
-    }, 6000); // Remove leaves after 5 seconds (adjust as needed)
+    }, 5000); // Remove leaves after 5 seconds (adjust as needed)
 }
 
 function startLeafSpawn() {
-    leafSpawnInterval = setInterval(createLeaf, 6000); // Add a new leaf every 2 seconds (adjust as needed)
+    leafSpawnInterval = setInterval(createLeaf, 5000); // Add a new leaf every 2 seconds (adjust as needed)
 }
 
 function stopLeafSpawn() {
