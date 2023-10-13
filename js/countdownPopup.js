@@ -125,14 +125,14 @@ function updateCountdown() {
     const minutes = now.getMinutes();
     const seconds = now.getSeconds();
 
-    if (minutes === 59 && !messageShown) {
+    if (minutes === 15 && !messageShown) {
         showMessage('5 minutes till the 20!');
         setTimeout(() => {
             if (countdownMessage.innerHTML === '5 minutes till the 20!') {
                 hideMessage();
             }
         }, 60000);
-    } else if (minutes === 0 && !messageShown) {
+    } else if (minutes === 19 && !messageShown) {
         if (seconds === 0) {
             const remainingSeconds = 60;
             showMessage(`${remainingSeconds} seconds until the 20!`, 1000);
@@ -140,11 +140,11 @@ function updateCountdown() {
             const remainingSeconds = 60 - seconds;
             showMessage(`${remainingSeconds} seconds until the 20!`, 1000);
         }
-    } else if (minutes === 1 && !messageShown) {
+    } else if (minutes === 20 && !messageShown) {
         showMessage('CHEERS HAPPY 20!!');
         showClouds();
         showLeaves();
-    }  else if (minutes >= 2) {
+    }  else if (minutes >= 21) {
         // After 5 minutes, hide the final elements
         hideFinalElements();
     }
