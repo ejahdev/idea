@@ -51,7 +51,7 @@ function hideFinalElements() {
 
 function hideFinalElements() {
     // Smoothly hide the countdown message, clouds, leaves, and individual leaves
-    const elementsToHide = document.querySelectorAll('#countdown-message, .cloud, .leaf, .leaves, .final-message, #Container');
+    const elementsToHide = document.querySelectorAll('#countdown-message, .cloud, .leaf, .leaves, .final-message, .container, .clock');
     elementsToHide.forEach((element) => {
         element.style.opacity = 0;
     });
@@ -99,12 +99,12 @@ function showClouds() {
 }
 
 function moveCloudLeftRandomly(cloud) {
-    const randomPercentage = 10 + Math.random() * 10; // Adjust the range as needed
+    const randomPercentage = 10 + Math.random() * 15; // Adjust the range as needed
     cloud.style.animation = `moveCloudLeft ${randomPercentage}s linear, slideBackAndForth 2s linear infinite`;
 }
 
 function moveCloudRightRandomly(cloud) {
-    const randomPercentage = 10 + Math.random() * 10; // Adjust the range as needed
+    const randomPercentage = 10 + Math.random() * 15; // Adjust the range as needed
     cloud.style.animation = `moveCloudRight ${randomPercentage}s linear, slideBackAndForth 2s linear infinite`;
 }
 
@@ -128,7 +128,7 @@ function hideMessage() {
 
 function showLeaves() {
     Container.style.display = 'block';
-    setInterval(createLeaf, 5000); // Add a new leaf every 1 second (adjust as needed)
+    setInterval(createLeaf, 7000); // Add a new leaf every 1 second (adjust as needed)
 }
 
 function hideLeaves() {
@@ -176,11 +176,11 @@ function createLeaf() {
     Container.appendChild(leaf);
     setTimeout(() => {
         Container.removeChild(leaf);
-    }, 5000); // Remove leaves after 5 seconds (adjust as needed)
+    }, 4000); // Remove leaves after 5 seconds (adjust as needed)
 }
 
 function startLeafSpawn() {
-    leafSpawnInterval = setInterval(createLeaf, 5000); // Add a new leaf every 2 seconds (adjust as needed)
+    leafSpawnInterval = setInterval(createLeaf, 7000); // Add a new leaf every 2 seconds (adjust as needed)
 }
 
 function stopLeafSpawn() {
