@@ -7,8 +7,11 @@ let messageShown = false;
 let finalMessageTimeout;
 
 function showMessage(message, duration) {
-    if (countdownMessage.innerText !== message) {
-        countdownMessage.innerText = message;
+    if (countdownMessage.innerHTML !== message) {
+        // Wrap specific words in spans with different colors
+        message = message.replace(/\b(10|9|8|7|6|5|4|3|2|1) seconds\b/g, '<span style="color: red;">$1</span> seconds');
+        message = message.replace('CHEERS', '<span style="color: green;">CHEERS</span>');
+        countdownMessage.innerHTML = message;
         countdownMessage.style.display = 'block';
         countdownMessage.style.animation = 'bounce 0.5s ease-in-out infinite';
     }
@@ -17,14 +20,26 @@ function showMessage(message, duration) {
         showClock();
     }
 
-    setTimeout(() => {
+    if (finalMessageTimeout) {
+        clearTimeout(finalMessageTimeout);
+    }
+
+    finalMessageTimeout = setTimeout(() => {
         if (message === 'CHEERS HAPPY 20!!') {
-            messageShown = true;
-            hideClouds();
-            hideMessage();
-            hideClock();
+            //showClouds();
+            setTimeout(() => {
+                hideFinalElements();
+            }, 60000); // Hide the final elements one minute after the final message
         }
     }, duration);
+}
+
+function hideFinalElements() {
+    // Add logic to hide final elements here
+    // For example, hide any final elements you want to hide one minute after the final message
+    hideClouds();
+    hideMessage();
+    hideClock();
 }
 
 function showClock() {
@@ -48,11 +63,25 @@ function updateClock() {
     clock.innerText = timeString;
 }
 
+function showClouds() {
+    // Show the clouds by adjusting the opacity
+    cloudLeft.style.display = "block";
+    cloudRight.style.display = "block";
+    cloudLeft.style.opacity = 0.8;
+    cloudRight.style.opacity = 0.8;
+    cloudLeft.style.animation = 'moveCloudLeft 10s linear, slideBackAndForth 2s linear infinite';
+    cloudRight.style.animation = 'moveCloudRight 10s linear, slideBackAndForth 2s linear infinite';
+}
+
 function hideClouds() {
-    cloudLeft.style.display = 'none';
-    cloudRight.style.display = 'none';
-    cloudLeft.style.animation = 'none';
-    cloudRight.style.animation = 'none';
+    cloudLeft.style.opacity = 0;
+    cloudRight.style.opacity = 0;
+
+    setTimeout(() => {
+        cloudLeft.style.display = 'none';
+        cloudRight.style.display = 'none';
+        hideMessage();
+    }, 10000); // Adjust the timeout value as needed
 }
 
 function hideMessage() {
@@ -68,16 +97,26 @@ function updateCountdown() {
     const seconds = now.getSeconds();
 
     if (minutes === 15 && !messageShown) {
-        showMessage('5 minutes till the 20!', 60000);
+        showMessage('5 minutes till the 20!');
+        setTimeout(() => {
+            if (countdownMessage.innerHTML === '5 minutes till the 20!') {
+                hideMessage();
+            }
+        }, 60000);
     } else if (minutes === 19 && !messageShown) {
         if (seconds === 0) {
-            const remainingSeconds = 60; // Show the complete countdown
-            showMessage(`${remainingSeconds} seconds until the 20!`, 60000);
-            cloudLeft.style.animation = 'moveCloudLeft 10s linear infinite';
-            cloudRight.style.animation = 'moveCloudRight 10s linear infinite';
+            const remainingSeconds = 60;
+            showMessage(`${remainingSeconds} seconds until the 20!`, 1000);
+        } else {
+            const remainingSeconds = 60 - seconds;
+            showMessage(`${remainingSeconds} seconds until the 20!`, 1000);
         }
     } else if (minutes === 20 && !messageShown) {
-        showMessage('CHEERS HAPPY 20!!', 60000);
+        showMessage('CHEERS HAPPY 20!!');
+        showClouds();
+    }  else if (minutes >= 21) {
+        // After 5 minutes, hide the final elements
+        hideFinalElements();
     }
 }
 
@@ -85,5 +124,5 @@ function updateCountdown() {
 // Call updateCountdown every second
 setInterval(() => {
     updateCountdown();
-    updateClock(); // Add this line to update the clock every second
+    updateClock();
 }, 1000);
