@@ -13,7 +13,7 @@ let leafSpawnInterval;
 function showMessage(message, duration) {
     if (countdownMessage.innerHTML !== message) {
         // Wrap specific words in spans with different colors
-        message = message.replace(/\b(10|9|8|7|6|5|4|3|2|1) seconds\b/g, '<span style="color: red;">$1</span> seconds');
+        message = message.replace(/\b(\d+:(?:[0-9]|1[0-9])) seconds\b/g, '<span style="color: red;">$1</span> seconds');
         message = message.replace(/\b(20|19|18|17|16|15|14|13|12|11) seconds\b/g, '<span style="color: orange;">$1</span> seconds');
         message = message.replace('CHEERS', '<span style="color: green;">CHEERS</span>');
         countdownMessage.innerHTML = message;
@@ -41,25 +41,17 @@ function showMessage(message, duration) {
 }
 
 function hideFinalElements() {
-    // Add logic to hide final elements here
-    // For example, hide any final elements you want to hide one minute after the final message
-    hideClouds();
-    hideMessage();
-    hideClock();
-    hideLeaves();
-}
-
-function hideFinalElements() {
     // Smoothly hide the countdown message, clouds, leaves, and individual leaves
     const elementsToHide = document.querySelectorAll('#countdown-message, .cloud, .leaf, .leaves, .final-message, .container, .clock');
     elementsToHide.forEach((element) => {
-        element.style.opacity = 0;
+        element.classList.add('fade-out'); // Add the fade-out class
     });
 
     setTimeout(() => {
         // Hide the elements and remove them from the DOM
         elementsToHide.forEach((element) => {
             element.style.display = 'none';
+            element.classList.remove('fade-out'); // Remove the fade-out class
         });
     }, 2000); // Adjust the duration to match the transition duration
 }
@@ -121,14 +113,17 @@ function hideClouds() {
 
 function hideMessage() {
     if (!messageShown) {
-        countdownMessage.style.display = 'none';
-        countdownMessage.style.animation = 'none';
+        countdownMessage.opacity = 0;
+        setTimeout(() => {
+            countdownMessage.style.display = 'none';
+            countdownMessage.style.animation = 'none';
+        }, 1000); // Adjust the duration to match the transition duration
     }
 }
 
 function showLeaves() {
     Container.style.display = 'block';
-    setInterval(createLeaf, 7000); // Add a new leaf every 1 second (adjust as needed)
+    setInterval(createLeaf, 7000); // Add a new leaf every 7 seconds (adjust as needed)
 }
 
 function hideLeaves() {
@@ -148,8 +143,17 @@ function updateCountdown() {
                 hideClock();
             }
         }, 60000);
-    } else if (minutes === 19 && !messageShown) {
+    } else if (minutes === 18 && !messageShown) {
         showClock();
+        if (seconds === 0) {
+            const remainingSeconds = 60;
+            showMessage(`1 m ${remainingSeconds} s until the 20!`, 1000);
+        } else {
+            const remainingSeconds = 60 - seconds;
+            showMessage(`1 m ${remainingSeconds} s until the 20!`, 1000);
+        }
+
+    } else if (minutes === 19 && !messageShown) {
         if (seconds === 0) {
             const remainingSeconds = 60;
             showMessage(`${remainingSeconds} seconds until the 20!`, 1000);
@@ -157,6 +161,7 @@ function updateCountdown() {
         } else {
             const remainingSeconds = 60 - seconds;
             showMessage(`${remainingSeconds} seconds until the 20!`, 1000);
+        
         }
     } else if (minutes === 20 && !messageShown) {
         showMessage('CHEERS HAPPY 20!!');
@@ -176,11 +181,11 @@ function createLeaf() {
     Container.appendChild(leaf);
     setTimeout(() => {
         Container.removeChild(leaf);
-    }, 4000); // Remove leaves after 5 seconds (adjust as needed)
+    }, 4000); // Remove leaves after 4 seconds (adjust as needed)
 }
 
 function startLeafSpawn() {
-    leafSpawnInterval = setInterval(createLeaf, 7000); // Add a new leaf every 2 seconds (adjust as needed)
+    leafSpawnInterval = setInterval(createLeaf, 7000); // Add a new leaf every 7 seconds (adjust as needed)
 }
 
 function stopLeafSpawn() {
