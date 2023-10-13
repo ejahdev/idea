@@ -94,13 +94,13 @@ function showClouds() {
 }
 
 function moveCloudLeftRandomly(cloud) {
-    const randomPercentage = 10 + Math.random() * 15; // Adjust the range as needed
-    cloud.style.animation = `moveCloudLeft ${randomPercentage}s linear, slideBackAndForth 2s linear infinite`;
+    const randomPercentage = 5 + Math.random() * 25; // Adjust the range as needed
+    cloud.style.animation = `moveCloudLeft ${randomPercentage}s linear, slideBackAndForth 3s linear infinite`;
 }
 
 function moveCloudRightRandomly(cloud) {
-    const randomPercentage = 10 + Math.random() * 15; // Adjust the range as needed
-    cloud.style.animation = `moveCloudRight ${randomPercentage}s linear, slideBackAndForth 2s linear infinite`;
+    const randomPercentage = 5 + Math.random() * 25; // Adjust the range as needed
+    cloud.style.animation = `moveCloudRight ${randomPercentage}s linear, slideBackAndForth 3s linear infinite`;
 }
 
 function hideClouds() {
