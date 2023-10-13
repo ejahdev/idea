@@ -3,6 +3,9 @@ const cloudLeft = document.getElementById('cloud-left');
 const cloudRight = document.getElementById('cloud-right');
 const clock = document.getElementById('clock');
 
+// JavaScript to create and remove leaves dynamically
+const leavesContainer = document.querySelector('.leaves-container');
+
 let messageShown = false;
 let finalMessageTimeout;
 
@@ -27,6 +30,7 @@ function showMessage(message, duration) {
     finalMessageTimeout = setTimeout(() => {
         if (message === 'CHEERS HAPPY 20!!') {
             //showClouds();
+            //showLeaves();
             setTimeout(() => {
                 hideFinalElements();
             }, 60000); // Hide the final elements one minute after the final message
@@ -40,6 +44,7 @@ function hideFinalElements() {
     hideClouds();
     hideMessage();
     hideClock();
+    hideLeaves();
 }
 
 function showClock() {
@@ -91,19 +96,27 @@ function hideMessage() {
     }
 }
 
+function showLeaves() {
+    leaves.style.display = 'block';
+}
+
+function hideLeaves() {
+    leaves.style.display = 'none';
+}
+
 function updateCountdown() {
     const now = new Date();
     const minutes = now.getMinutes();
     const seconds = now.getSeconds();
 
-    if (minutes === 15 && !messageShown) {
+    if (minutes === 40 && !messageShown) {
         showMessage('5 minutes till the 20!');
         setTimeout(() => {
             if (countdownMessage.innerHTML === '5 minutes till the 20!') {
                 hideMessage();
             }
         }, 60000);
-    } else if (minutes === 19 && !messageShown) {
+    } else if (minutes === 41 && !messageShown) {
         if (seconds === 0) {
             const remainingSeconds = 60;
             showMessage(`${remainingSeconds} seconds until the 20!`, 1000);
@@ -111,14 +124,27 @@ function updateCountdown() {
             const remainingSeconds = 60 - seconds;
             showMessage(`${remainingSeconds} seconds until the 20!`, 1000);
         }
-    } else if (minutes === 20 && !messageShown) {
+    } else if (minutes === 42 && !messageShown) {
         showMessage('CHEERS HAPPY 20!!');
         showClouds();
-    }  else if (minutes >= 21) {
+        showLeaves();
+    }  else if (minutes >= 43) {
         // After 5 minutes, hide the final elements
         hideFinalElements();
     }
 }
+
+function createLeaf() {
+    const leaf = document.createElement('div');
+    leaf.classList.add('leaf');
+    leaf.style.left = `${Math.random() * 100}%`;
+    leavesContainer.appendChild(leaf);
+    setTimeout(() => {
+        leavesContainer.removeChild(leaf);
+    }, 5000); // Remove leaves after 5 seconds (adjust as needed)
+}
+
+setInterval(createLeaf, 1000); // Add a new leaf every 1 second (adjust as needed)
 
 // To ensure the message appears at exactly 20 minutes past the hour
 // Call updateCountdown every second
