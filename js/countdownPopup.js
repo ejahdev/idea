@@ -4,15 +4,17 @@ const cloudRight = document.getElementById('cloud-right');
 const clock = document.getElementById('clock');
 
 // JavaScript to create and remove leaves dynamically
-const leavesContainer = document.querySelector('.leaves-container');
+const Container = document.querySelector('.container');
 
 let messageShown = false;
 let finalMessageTimeout;
+let leafSpawnInterval;
 
 function showMessage(message, duration) {
     if (countdownMessage.innerHTML !== message) {
         // Wrap specific words in spans with different colors
         message = message.replace(/\b(10|9|8|7|6|5|4|3|2|1) seconds\b/g, '<span style="color: red;">$1</span> seconds');
+        message = message.replace(/\b(20|19|18|17|16|15|14|13|12|11) seconds\b/g, '<span style="color: yellow;">$1</span> seconds');
         message = message.replace('CHEERS', '<span style="color: green;">CHEERS</span>');
         countdownMessage.innerHTML = message;
         countdownMessage.style.display = 'block';
@@ -56,6 +58,7 @@ function hideClock() {
     clock.style.display = 'none';
 }
 
+    // Your code for updating the clock goes here
 function updateClock() {
     const now = new Date();
     const hours = now.getHours();
@@ -74,8 +77,20 @@ function showClouds() {
     cloudRight.style.display = "block";
     cloudLeft.style.opacity = 0.8;
     cloudRight.style.opacity = 0.8;
-    cloudLeft.style.animation = 'moveCloudLeft 10s linear, slideBackAndForth 2s linear infinite';
-    cloudRight.style.animation = 'moveCloudRight 10s linear, slideBackAndForth 2s linear infinite';
+
+    // Use JavaScript to move the clouds randomly
+    moveCloudLeftRandomly(cloudLeft);
+    moveCloudRightRandomly(cloudRight);
+}
+
+function moveCloudLeftRandomly(cloud) {
+    const randomPercentage = 10 + Math.random() * 10; // Adjust the range as needed
+    cloud.style.animation = `moveCloudLeft ${randomPercentage}s linear, slideBackAndForth 2s linear infinite`;
+}
+
+function moveCloudRightRandomly(cloud) {
+    const randomPercentage = 10 + Math.random() * 10; // Adjust the range as needed
+    cloud.style.animation = `moveCloudRight ${randomPercentage}s linear, slideBackAndForth 2s linear infinite`;
 }
 
 function hideClouds() {
@@ -97,11 +112,12 @@ function hideMessage() {
 }
 
 function showLeaves() {
-    leaves.style.display = 'block';
+    Container.style.display = 'block';
+    setInterval(createLeaf, 1000); // Add a new leaf every 1 second (adjust as needed)
 }
 
 function hideLeaves() {
-    leaves.style.display = 'none';
+    Container.style.display = 'none';
 }
 
 function updateCountdown() {
@@ -109,14 +125,14 @@ function updateCountdown() {
     const minutes = now.getMinutes();
     const seconds = now.getSeconds();
 
-    if (minutes === 40 && !messageShown) {
+    if (minutes === 59 && !messageShown) {
         showMessage('5 minutes till the 20!');
         setTimeout(() => {
             if (countdownMessage.innerHTML === '5 minutes till the 20!') {
                 hideMessage();
             }
         }, 60000);
-    } else if (minutes === 41 && !messageShown) {
+    } else if (minutes === 0 && !messageShown) {
         if (seconds === 0) {
             const remainingSeconds = 60;
             showMessage(`${remainingSeconds} seconds until the 20!`, 1000);
@@ -124,11 +140,11 @@ function updateCountdown() {
             const remainingSeconds = 60 - seconds;
             showMessage(`${remainingSeconds} seconds until the 20!`, 1000);
         }
-    } else if (minutes === 42 && !messageShown) {
+    } else if (minutes === 1 && !messageShown) {
         showMessage('CHEERS HAPPY 20!!');
         showClouds();
         showLeaves();
-    }  else if (minutes >= 43) {
+    }  else if (minutes >= 2) {
         // After 5 minutes, hide the final elements
         hideFinalElements();
     }
@@ -137,14 +153,21 @@ function updateCountdown() {
 function createLeaf() {
     const leaf = document.createElement('div');
     leaf.classList.add('leaf');
-    leaf.style.left = `${Math.random() * 100}%`;
-    leavesContainer.appendChild(leaf);
+    leaf.style.left = `${Math.random() * 100}%`; // Random horizontal placement
+    leaf.style.top = `${Math.random() * 100}%`; // Random vertical placement
+    Container.appendChild(leaf);
     setTimeout(() => {
-        leavesContainer.removeChild(leaf);
-    }, 5000); // Remove leaves after 5 seconds (adjust as needed)
+        Container.removeChild(leaf);
+    }, 6000); // Remove leaves after 5 seconds (adjust as needed)
 }
 
-setInterval(createLeaf, 1000); // Add a new leaf every 1 second (adjust as needed)
+function startLeafSpawn() {
+    leafSpawnInterval = setInterval(createLeaf, 6000); // Add a new leaf every 2 seconds (adjust as needed)
+}
+
+function stopLeafSpawn() {
+    clearInterval(leafSpawnInterval);
+}
 
 // To ensure the message appears at exactly 20 minutes past the hour
 // Call updateCountdown every second

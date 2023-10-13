@@ -8,9 +8,13 @@ body {
     overflow: hidden;
 }
 
-#countdown-message {
+#countdown-message.final-message {
     display: none;
     position: absolute;
+    align-items: center;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
     font-size: 130px;
     font-weight: bolder;
     bottom: 400px;
@@ -21,8 +25,38 @@ body {
     animation: bounce 0.5s ease-in-out infinite; /* Adjust the duration and timing function as needed */
 }
 
+#countdown-message {
+    display: none;
+    position: absolute;
+    align-items: center;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    font-size: 130px;
+    font-weight: bolder;
+    bottom: 400px;
+    color: #ffffff;
+    -webkit-text-stroke: 4px black;
+    padding: 10px 20px;
+    text-align: center;
+    animation: bounce 0.5s ease-in-out infinite; /* Adjust the duration and timing function as needed */
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    margin: 0;
+    overflow: hidden;
+}
+
 .red-text {
     color: red;
+}
+.yellow-text {
+    color: yellow;
 }
 
 .green-text {
@@ -32,6 +66,12 @@ body {
 #clock {
     position: absolute;
     bottom: 540px;
+    align-items: center;
+    text-align: center;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    margin: 0;
     font-size: 50px;
     font-weight: bolder;
     -webkit-text-stroke: 2px black;
@@ -48,37 +88,22 @@ body {
     display: none;
 }
 
-/* Add CSS styles for the clouds with opacity and transition */
 #cloud-left {
     position: absolute;
-    animation: moveCloudLeft 10s linear, slideBackAndForth 5s linear infinite;
+    bottom: 50px; /* Adjust the initial vertical position */
+    left: 70px; /* Adjust the initial horizontal position */
     opacity: 0.7;
     transition: opacity 5s ease-in-out;
 }
 
 #cloud-right {
     position: absolute;
-    animation: moveCloudRight 10s linear, slideBackAndForth 5s linear infinite;
+    bottom: 50px; /* Adjust the initial vertical position */
+    right: 70px; /* Adjust the initial horizontal position */
     opacity: 0.7;
-    transition: opacity 5s ease-in-out;
-}
-@keyframes moveCloudLeft {
-    0% {
-        left: -100%; /* Start off the screen to the left */
-    }
-    100% {
-        left: 15%; /* Move them to 20% of the screen width, stop them from overlapping */
-    }
+    transition: opacity 5s ease-inout;
 }
 
-@keyframes moveCloudRight {
-    0% {
-        right: -100%; /* Start off the screen to the right */
-    }
-    100% {
-        right: 15%; /* Move them to 20% of the screen width, stop them from overlapping */
-    }
-}
 
 @keyframes slideBackAndForth {
     0% {
@@ -98,31 +123,35 @@ body {
     50% { transform: translateY(-5px); } /* Adjust the bounce height as needed */
 }
 
-#leaves-container {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
+
   
-  .leaf {
+.leaf {
     position: absolute;
-    width: 20px; /* Adjust the size of your leaves */
-    height: 20px;
+    width: 140px; /* Adjust the size of your leaves */
+    height: 140px;
+    opacity: 0.7;
     background-image: url('https://raw.githubusercontent.com/ejahdev/idea/main/img/leaf.png'); /* Use your leaf image */
     background-size: cover;
-    animation: fall 4s linear infinite;
-  }
+    animation: fall 6s linear infinite;
+}
+
+.leaves {
+    position: absolute;
+    width: 140px; /* Adjust the size as needed */
+    height: 140px; /* Adjust the size as needed */
+    animation: fallLeaves 6s linear infinite; /* Adjust the duration and timing function as needed */
+    display: none; /* Initially hide the leaves */
+}
+
   
-  @keyframes fall {
+@keyframes fall {
     0% {
-      transform: translateY(0);
-      opacity: 1;
+        transform: translateY(0);
+        opacity: 1;
     }
     100% {
-      transform: translateY(100vh);
-      opacity: 0;
+        transform: translateY(100vh);
+        opacity: 0;
     }
-  }
+}
   
