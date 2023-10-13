@@ -170,6 +170,7 @@ body {
     position: absolute;
     width: 280px; /* Adjust the size as needed */
     height: 280px; /* Adjust the size as needed */
+    opacity: 0.5;
     animation: fallLeaves 12s linear infinite; /* Adjust the duration and timing function as needed */
     z-index: 6;
     display: none; /* Initially hide the leaves */

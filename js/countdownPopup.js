@@ -10,10 +10,13 @@ let messageShown = false;
 let finalMessageTimeout;
 let leafSpawnInterval;
 
+// Initially hide the clock
+hideClock();
+
 function showMessage(message, duration) {
     if (countdownMessage.innerHTML !== message) {
         // Wrap specific words in spans with different colors
-        message = message.replace(/\b(\d+:(?:[0-9]|1[0-9])) seconds\b/g, '<span style="color: red;">$1</span> seconds');
+        message = message.replace(/\b(10|9|8|7|6|5|4|3|2|1) seconds\b/g, '<span style="color: red;">$1</span> seconds');
         message = message.replace(/\b(20|19|18|17|16|15|14|13|12|11) seconds\b/g, '<span style="color: orange;">$1</span> seconds');
         message = message.replace('CHEERS', '<span style="color: green;">CHEERS</span>');
         countdownMessage.innerHTML = message;
