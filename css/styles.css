@@ -130,10 +130,10 @@ body {
         transform: translateX(0); /* Start at the current position */
     }
     50% {
-        transform: translateX(-15px); /* Slide left by 5 pixels */
+        transform: translateX(-20px); /* Slide left by 5 pixels */
     }
     100% {
-        transform: translateX(15px); /* Slide right by 5 pixels */
+        transform: translateX(20px); /* Slide right by 5 pixels */
     }
 }
 
