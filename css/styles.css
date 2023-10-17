@@ -137,13 +137,13 @@ body {
 
 @keyframes slideBackAndForth {
     0% {
-        transform: translateX(0); /* Start at the current position */
+        transform: translateX(-20px); /* Start slightly to the left */
     }
     50% {
-        transform: translateX(-20px); /* Slide left by 5 pixels */
+        transform: translateX(20px); /* Move to the right */
     }
     100% {
-        transform: translateX(20px); /* Slide right by 5 pixels */
+        transform: translateX(-20px); /* Return to the left */
     }
 }
 
