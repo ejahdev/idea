@@ -3,6 +3,12 @@ const cloudLeft = document.getElementById('cloud-left');
 const cloudRight = document.getElementById('cloud-right');
 const clock = document.getElementById('clock');
 
+const numRows = 10;
+const numCols = 10;
+
+const cellWidth = window.innerWidth / numCols;
+const cellHeight = window.innerHeight / numRows;
+
 // JavaScript to create and remove leaves dynamically
 const Container = document.querySelector('.container');
 
@@ -180,13 +186,13 @@ function createLeaf() {
     const leaf = document.createElement('div');
     leaf.classList.add('leaf');
 
-    // Choose a random section
-    const sectionX = Math.floor(Math.random() * 4);
-    const sectionY = Math.floor(Math.random() * 4);
+    // Choose a random row and column
+    const rowIndex = Math.floor(Math.random() * numRows);
+    const colIndex = Math.floor(Math.random() * numCols);
 
-    // Choose a random position within the section
-    const x = sectionX * window.innerWidth/4 + Math.random() * window.innerWidth/4;
-    const y = sectionY * window.innerHeight/4 + Math.random() * window.innerHeight/4;
+    // Calculate the left and top properties based on the row and column indices
+    const x = colIndex * cellWidth + Math.random() * cellWidth;
+    const y = rowIndex * cellHeight + Math.random() * cellHeight;
 
     // Set the leaf's position
     leaf.style.left = `${x}px`;
