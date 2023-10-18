@@ -179,9 +179,21 @@ function updateCountdown() {
 function createLeaf() {
     const leaf = document.createElement('div');
     leaf.classList.add('leaf');
-    leaf.style.left = `${Math.random() * window.innerWidth}px`; // Random horizontal placement
-    leaf.style.top = `${Math.random() * window.innerHeight}px`; // Random vertical placement
+
+    // Choose a random section
+    const sectionX = Math.floor(Math.random() * 4);
+    const sectionY = Math.floor(Math.random() * 4);
+
+    // Choose a random position within the section
+    const x = sectionX * window.innerWidth/4 + Math.random() * window.innerWidth/4;
+    const y = sectionY * window.innerHeight/4 + Math.random() * window.innerHeight/4;
+
+    // Set the leaf's position
+    leaf.style.left = `${x}px`;
+    leaf.style.top = `${y}px`;
+
     Container.appendChild(leaf);
+
     setTimeout(() => {
         Container.removeChild(leaf);
     }, 4000); // Remove leaves after 4 seconds (adjust as needed)
