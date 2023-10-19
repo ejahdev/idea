@@ -179,7 +179,7 @@ body {
         transform: scale(1);
     }
     50% {
-        transform: scale(1.05); /* Adjust the zoom level as needed */
+        transform: scale(1.2); /* Adjust the zoom level as needed */
     }
 }
   

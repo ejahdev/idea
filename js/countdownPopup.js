@@ -27,10 +27,10 @@ function showMessage(message, duration) {
         message = message.replace('CHEERS', '<span style="color: green;">CHEERS</span>');
         countdownMessage.innerHTML = message;
         countdownMessage.style.display = 'block';
-        countdownMessage.style.animation = 'bounce 0.5s ease-in-out infinite';
     }
 
     if (message === '5 minutes till the 20!') {
+        countdownMessage.style.animation = 'bounce 0.5s ease-in-out infinite';
         showClock();
     }
 
@@ -40,8 +40,7 @@ function showMessage(message, duration) {
 
     finalMessageTimeout = setTimeout(() => {
         if (message === 'CHEERS HAPPY 20!!') {
-            countdownMessage.classList.add('final-message');
-            countdownMessage.style.animation = 'zoomInOut 2s ease-in-out infinite'; // Adjust the duration and timing function as needed
+            countdownMessage.style.animation = 'zoomInOut 2s ease-in-out infinite';
             //showClouds();
             //showLeaves();
             setTimeout(() => {
@@ -53,7 +52,7 @@ function showMessage(message, duration) {
 
 function hideFinalElements() {
     // Smoothly hide the countdown message, clouds, leaves, and individual leaves
-    const elementsToHide = document.querySelectorAll('#countdown-message, .cloud, .leaf, .leaves, .final-message, .container, .clock');
+    const elementsToHide = document.querySelectorAll('#final-countdown-message, .cloud, .leaf, .leaves, .final-message, .container, .clock, #countdown-message');
     elementsToHide.forEach((element) => {
         element.classList.add('fade-out'); // Add the fade-out class
     });
@@ -175,6 +174,7 @@ function updateCountdown() {
         
         }
     } else if (minutes === 20 && !messageShown) {
+        countdownMessage.style.animation = 'zoomInOut 2s ease-in-out infinite';
         showMessage('CHEERS HAPPY 20!!');
         showClouds();
         showLeaves();
