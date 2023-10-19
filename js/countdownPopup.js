@@ -40,6 +40,8 @@ function showMessage(message, duration) {
 
     finalMessageTimeout = setTimeout(() => {
         if (message === 'CHEERS HAPPY 20!!') {
+            countdownMessage.classList.add('final-message');
+            countdownMessage.style.animation = 'zoomInOut 2s ease-in-out infinite'; // Adjust the duration and timing function as needed
             //showClouds();
             //showLeaves();
             setTimeout(() => {

@@ -9,9 +9,30 @@ body {
     overflow: hidden;
 }
 
+@font-face {
+    font-family: 'Spooky'; 
+    src: url('../fonts/spooky.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Matanza'; 
+    src: url('../fonts/matanza.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fatal'; 
+    src: url('../fonts/fatal.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 #countdown-message.final-message {
     display: none;
-    font-family: "Arial Black", sans-serif;
+    font-family: "Fatal", "Arial Black", sans-serif;
     position: absolute;
     align-items: center;
     left: 0;
@@ -23,17 +44,17 @@ body {
     min-width: 2560px;
     bottom: 400px;
     color: #ffffff;
-    -webkit-text-stroke: 4px black;
+    -webkit-text-stroke: 6px black;
     padding: 10px 20px;
     text-align: center;
-    animation: bounce 0.5s ease-in-out infinite; /* Adjust the duration and timing function as needed */
+    animation: zoomInOut 2s ease-in-out infinite; /* Adjust the duration and timing function as needed */
     overflow: hidden;
 }
 
 #countdown-message {
     display: none;
     position: absolute;
-    font-family: "Arial Black", sans-serif;
+    font-family: "Fatal", "Arial Black", sans-serif;
     align-items: center;
     left: 0;
     right: 0;
@@ -44,7 +65,7 @@ body {
     font-weight: bolder;
     bottom: 400px;
     color: #ffffff;
-    -webkit-text-stroke: 4px black;
+    -webkit-text-stroke: 6px black;
     padding: 10px 20px;
     text-align: center;
     animation: bounce 0.5s ease-in-out infinite; /* Adjust the duration and timing function as needed */
@@ -117,7 +138,7 @@ body {
     bottom: 0px; /* Adjust the initial vertical position */
     left: 120px; /* Adjust the initial horizontal position */
     opacity: 0.7;
-    width: 800px;
+    width: 1000px;
     transition: opacity 5s ease-in-out;
 }
 
@@ -126,7 +147,7 @@ body {
     bottom: 0px; /* Adjust the initial vertical position */
     right: 120px; /* Adjust the initial horizontal position */
     opacity: 0.7;
-    width: 800px;
+    width: 1000px;
     transition: opacity 5s ease-inout;
 }
 
@@ -153,7 +174,14 @@ body {
     50% { transform: translateY(-5px); } /* Adjust the bounce height as needed */
 }
 
-
+@keyframes zoomInOut {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05); /* Adjust the zoom level as needed */
+    }
+}
   
 .leaf {
     position: absolute;
