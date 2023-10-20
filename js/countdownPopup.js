@@ -188,24 +188,39 @@ function createLeaf() {
     const leaf = document.createElement('div');
     leaf.classList.add('leaf');
 
-    // Choose a random row and column
-    const rowIndex = Math.floor(Math.random() * numRows);
-    const colIndex = Math.floor(Math.random() * numCols);
-
-    // Calculate the left and top properties based on the row and column indices
-    const x = colIndex * cellWidth + Math.random() * cellWidth;
-    const y = rowIndex * cellHeight + Math.random() * cellHeight;
+    // Calculate the initial position at the top of the screen
+    const x = Math.random() * window.innerWidth; // Random horizontal position
+    const y = 0; // Start at the top of the screen
 
     // Set the leaf's position
     leaf.style.left = `${x}px`;
     leaf.style.top = `${y}px`;
 
-    Container.appendChild(leaf);
+    document.body.appendChild(leaf); // Append to the body or your desired container
 
+    // Animate the leaf falling
+    const fallSpeed = Math.random() * 5 + 2; // Adjust the speed as needed
+    const animateLeaf = () => {
+        if (y < window.innerHeight) {
+            y += fallSpeed;
+            leaf.style.top = `${y}px`;
+            requestAnimationFrame(animateLeaf);
+        } else {
+            // Leaf has fallen out of the screen, remove it
+            document.body.removeChild(leaf);
+        }
+    };
+
+    animateLeaf();
+
+    // Optionally, you can remove leaves after a certain time
     setTimeout(() => {
-        Container.removeChild(leaf);
-    }, 4000); // Remove leaves after 4 seconds (adjust as needed)
+        document.body.removeChild(leaf);
+    }, 10000); // Remove leaves after 10 seconds (adjust as needed)
 }
+
+// Call createLeaf to spawn leaves
+createLeaf(); // Call this function whenever you want to create a new leaf
 
 function startLeafSpawn() {
     leafSpawnInterval = setInterval(createLeaf, 7000); // Add a new leaf every 7 seconds (adjust as needed)
