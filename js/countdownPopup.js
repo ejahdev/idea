@@ -126,7 +126,7 @@ function updateCountdown() {
                 hideMessage();
             }
         }, 60000);
-    } else if (minutes === 19 && !messageShown) {
+    } else if (minutes === 18 && !messageShown) {
         if (seconds === 0) {
             const remainingSeconds = 60;
             showMessage(`1 m ${remainingSeconds} s until the 20!`, 1000);
