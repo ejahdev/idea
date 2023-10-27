@@ -9,30 +9,9 @@ body {
     overflow: hidden;
 }
 
-@font-face {
-    font-family: 'Spooky'; 
-    src: url('../fonts/spooky.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Matanza'; 
-    src: url('../fonts/matanza.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Fatal'; 
-    src: url('../fonts/fatal.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 #countdown-message.final-message {
     display: none;
-    font-family: "Fatal", "Arial Black", sans-serif;
+    font-family: 'Alfa Slab One', serif;
     position: absolute;
     align-items: center;
     left: 0;
@@ -44,7 +23,7 @@ body {
     min-width: 2560px;
     bottom: 400px;
     color: #ffffff;
-    -webkit-text-stroke: 6px black;
+    -webkit-text-stroke: 4px black;
     padding: 10px 20px;
     text-align: center;
     animation: zoomInOut 2s ease-in-out infinite; /* Adjust the duration and timing function as needed */
@@ -54,7 +33,7 @@ body {
 #countdown-message {
     display: none;
     position: absolute;
-    font-family: "Fatal", "Arial Black", sans-serif;
+    font-family: 'Alfa Slab One', serif;
     align-items: center;
     left: 0;
     right: 0;
@@ -65,7 +44,7 @@ body {
     font-weight: bolder;
     bottom: 400px;
     color: #ffffff;
-    -webkit-text-stroke: 6px black;
+    -webkit-text-stroke: 4px black;
     padding: 10px 20px;
     text-align: center;
     animation: bounce 0.5s ease-in-out infinite; /* Adjust the duration and timing function as needed */
@@ -76,8 +55,7 @@ body {
 .leaf,
 .leaves,
 .message,
-.final-message,
-.clock {
+.final-message {
     transition: opacity 5s ease-in-out;
 }
 
@@ -102,26 +80,6 @@ body {
 
 .green-text {
     color:#bfff00;
-}
-/* Add CSS styles for the clock */
-#clock {
-    position: absolute;
-    bottom: 580px;
-    align-items: center;
-    text-align: center;
-    align-items: center;
-    left: 0;
-    right: 0;
-    min-width: 2560px;
-    font-family: "Arial Black", sans-serif;
-    justify-content: center;
-    margin: 0;
-    font-size: 50px;
-    overflow: hidden;
-    font-weight: bolder;
-    -webkit-text-stroke: 2px black;
-    color: rgb(157, 255, 0);
-    display: block;
 }
 
 .cloud {

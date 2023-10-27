@@ -1,7 +1,6 @@
 const countdownMessage = document.getElementById('countdown-message');
 const cloudLeft = document.getElementById('cloud-left');
 const cloudRight = document.getElementById('cloud-right');
-const clock = document.getElementById('clock');
 
 const numRows = 10;
 const numCols = 10;
@@ -16,8 +15,6 @@ let messageShown = false;
 let finalMessageTimeout;
 let leafSpawnInterval;
 
-// Initially hide the clock
-hideClock();
 
 function showMessage(message, duration) {
     if (countdownMessage.innerHTML !== message) {
@@ -31,7 +28,6 @@ function showMessage(message, duration) {
 
     if (message === '5 minutes till the 20!') {
         countdownMessage.style.animation = 'bounce 0.5s ease-in-out infinite';
-        showClock();
     }
 
     if (finalMessageTimeout) {
@@ -52,7 +48,7 @@ function showMessage(message, duration) {
 
 function hideFinalElements() {
     // Smoothly hide the countdown message, clouds, leaves, and individual leaves
-    const elementsToHide = document.querySelectorAll('#final-countdown-message, .cloud, .leaf, .leaves, .final-message, .container, .clock, #countdown-message');
+    const elementsToHide = document.querySelectorAll('#final-countdown-message, .cloud, .leaf, .leaves, .final-message, .container, #countdown-message');
     elementsToHide.forEach((element) => {
         element.classList.add('fade-out'); // Add the fade-out class
     });
@@ -64,28 +60,6 @@ function hideFinalElements() {
             element.classList.remove('fade-out'); // Remove the fade-out class
         });
     }, 2000); // Adjust the duration to match the transition duration
-}
-
-function showClock() {
-    clock.style.display = 'block';
-    updateClock();
-}
-
-function hideClock() {
-    clock.style.display = 'none';
-}
-
-    // Your code for updating the clock goes here
-function updateClock() {
-    const now = new Date();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    const twelveHourFormat = hours % 12 || 12;
-
-    const timeString = `${twelveHourFormat}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${ampm}`;
-    clock.innerText = timeString;
 }
 
 function showClouds() {
@@ -123,7 +97,7 @@ function hideClouds() {
 
 function hideMessage() {
     if (!messageShown) {
-        countdownMessage.opacity = 0;
+        countdownMessage.style.opacity = 0;
         setTimeout(() => {
             countdownMessage.style.display = 'none';
             countdownMessage.style.animation = 'none';
@@ -150,11 +124,9 @@ function updateCountdown() {
         setTimeout(() => {
             if (countdownMessage.innerHTML === '5 minutes till the 20!') {
                 hideMessage();
-                hideClock();
             }
         }, 60000);
-    } else if (minutes === 18 && !messageShown) {
-        showClock();
+    } else if (minutes === 19 && !messageShown) {
         if (seconds === 0) {
             const remainingSeconds = 60;
             showMessage(`1 m ${remainingSeconds} s until the 20!`, 1000);
@@ -216,8 +188,7 @@ function stopLeafSpawn() {
 }
 
 // To ensure the message appears at exactly 20 minutes past the hour
-// Call updateCountdown every second
 setInterval(() => {
     updateCountdown();
-    updateClock();
+
 }, 1000);
