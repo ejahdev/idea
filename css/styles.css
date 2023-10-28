@@ -22,7 +22,7 @@ body {
     font-weight: bolder;
     min-width: 2560px;
     bottom: 400px;
-    color: #ffffff;
+    color: greenyellow;
     -webkit-text-stroke: 4px black;
     padding: 10px 20px;
     text-align: center;
@@ -43,7 +43,7 @@ body {
     font-size: 150px;
     font-weight: bolder;
     bottom: 400px;
-    color: #ffffff;
+    color: greenyellow;
     -webkit-text-stroke: 4px black;
     padding: 10px 20px;
     text-align: center;
