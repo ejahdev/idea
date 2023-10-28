@@ -81,7 +81,7 @@ function moveCloudLeftRandomly(cloud) {
 
 function moveCloudRightRandomly(cloud) {
     const randomPercentage = 5 + Math.random() * 25; // Adjust the range as needed
-    cloud.style.animation = `moveCloudRight ${randomPercentage}s linear, slideBackAndForth 3s linear infinite`;
+    cloud.style.animation = `moveCloudRight ${randomPercentage}s linear, slideBackAndForthReverse 3s linear infinite`;
 }
 
 function hideClouds() {

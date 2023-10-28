@@ -94,8 +94,8 @@ body {
 #cloud-left {
     position: absolute;
     bottom: 0px; /* Adjust the initial vertical position */
-    left: 120px; /* Adjust the initial horizontal position */
-    opacity: 0.7;
+    left: 130px; /* Adjust the initial horizontal position */
+    opacity: 0.6;
     width: 1000px;
     transition: opacity 5s ease-in-out;
 }
@@ -103,8 +103,8 @@ body {
 #cloud-right {
     position: absolute;
     bottom: 0px; /* Adjust the initial vertical position */
-    right: 120px; /* Adjust the initial horizontal position */
-    opacity: 0.7;
+    right: 130px; /* Adjust the initial horizontal position */
+    opacity: 0.6;
     width: 1000px;
     transition: opacity 5s ease-inout;
 }
@@ -116,13 +116,25 @@ body {
 
 @keyframes slideBackAndForth {
     0% {
-        transform: translateX(-20px); /* Start slightly to the left */
+        transform: translateX(-30px); /* Start slightly to the left */
     }
     50% {
-        transform: translateX(20px); /* Move to the right */
+        transform: translateX(30px); /* Move to the right */
     }
     100% {
-        transform: translateX(-20px); /* Return to the left */
+        transform: translateX(-30px); /* Return to the left */
+    }
+}
+
+@keyframes slideBackAndForthReverse {
+    0% {
+        transform: translateX(30px); /* Start slightly to the right */
+    }
+    50% {
+        transform: translateX(-30px); /* Move to the left */
+    }
+    100% {
+        transform: translateX(30px); /* Return to the right */
     }
 }
 
